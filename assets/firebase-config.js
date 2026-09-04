@@ -15,10 +15,10 @@
  * clientes — é só ligar o Firebase para isso valer de verdade.
  */
 window.SHALOM_FIREBASE_CONFIG = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_PROJETO.firebaseapp.com",
-  projectId: "SEU_PROJETO",
-  storageBucket: "SEU_PROJETO.appspot.com",
-  messagingSenderId: "SEU_SENDER_ID",
-  appId: "SEU_APP_ID",
+  apiKey: "AIzaSyCCNJoi-oBl_glNf7utXq2cUKnNT91Pstk",
+  authDomain: "shalombarbershop-a28f6.firebaseapp.com",
+  projectId: "shalombarbershop-a28f6",
+  storageBucket: "shalombarbershop-a28f6.firebasestorage.app",
+  messagingSenderId: "360057176645",
+  appId: "1:360057176645:web:ee78ad8af4d2e96294192c",
 };

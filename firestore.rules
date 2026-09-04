@@ -1,0 +1,28 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Coleção "bookings": um documento por horário reservado.
+    // O id de cada documento é "AAAA-MM-DD_profissional_HHMM", então
+    // dois clientes nunca conseguem criar o mesmo horário — o segundo
+    // a tentar recebe erro de permissão porque o documento já existe.
+    match /bookings/{bookingId} {
+      // Qualquer visitante pode LER a lista de horários ocupados,
+      // para o site conseguir esconder o que já foi reservado.
+      allow read: if true;
+
+      // Criar um novo agendamento é permitido, mas só se o horário
+      // ainda não existir (impede sobrescrever/roubar um horário
+      // que outro cliente acabou de marcar) e só com os campos
+      // esperados.
+      allow create: if
+        !exists(/databases/$(database)/documents/bookings/$(bookingId)) &&
+        request.resource.data.keys().hasAll(['service','date','weekday','professionalId','professionalName','time','createdAt']);
+
+      // Ninguém pode alterar ou apagar um agendamento pelo site
+      // público. Cancelamentos devem ser feitos manualmente pelo
+      // console do Firebase ou por um painel administrativo à parte.
+      allow update, delete: if false;
+    }
+  }
+}
